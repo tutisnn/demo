@@ -72,7 +72,7 @@ dt{color:var(--muted)} dd{margin:0;overflow-wrap:anywhere}
   <form class="bar" id="form">
     <input type="file" id="file" accept="image/*" hidden>
     <button class="ghost" id="attach" type="button" title="Saç fotoğrafı ekle">Foto</button>
-    <textarea id="input" rows="1" placeholder="Mesaj yazın" aria-label="Mesaj"></textarea>
+    <textarea id="input" dir="auto" rows="1" placeholder="Mesaj yazın" aria-label="Mesaj"></textarea>
     <button class="btn" id="send" type="submit">Gönder</button>
   </form>
 </main>
@@ -96,14 +96,14 @@ const PHOTO_NOTE=' [Müşteri saç fotoğrafı gönderdi. Fotoğraf satış ekib
 function add(role,text,imgUrl){
   const d=document.createElement('div'); d.className='m '+(role==='user'?'me':'bot');
   if(imgUrl){const i=document.createElement('img');i.src=imgUrl;i.alt='Gönderilen fotoğraf';d.appendChild(i)}
-  const s=document.createElement('span'); s.textContent=text; d.appendChild(s);
+  const s=document.createElement('span'); s.dir='auto'; s.textContent=text; d.appendChild(s);
   $('log').appendChild(d); $('log').scrollTop=1e9; return s;
 }
 function sys(t){const d=document.createElement('div');d.className='sys';d.textContent=t;$('log').appendChild(d);$('log').scrollTop=1e9}
 
 function fillSummary(o){
   const dl=$('sum'); dl.textContent='';
-  for(const k in LABELS){ if(o&&o[k]!==undefined){const a=document.createElement('dt');a.textContent=LABELS[k];const b=document.createElement('dd');b.textContent=String(o[k]);dl.append(a,b)} }
+  for(const k in LABELS){ if(o&&o[k]!==undefined){const a=document.createElement('dt');a.textContent=LABELS[k];const b=document.createElement('dd');b.dir='auto';b.textContent=String(o[k]);dl.append(a,b)} }
   $('state').textContent='Satış ekibine devredildi'; $('state').className='pill ok';
 }
 
